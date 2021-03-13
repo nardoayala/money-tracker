@@ -6,9 +6,9 @@
   background-color: #307672;
   color: #e4eddb;
   &__container {
-    display: grid;
+    display: flex;
     align-items: center;
-    grid-template-columns: 85% 15%;
+    justify-content: center;
     max-width: 800px;
     width: 90%;
     margin: auto;
@@ -17,14 +17,8 @@
     justify-self: center;
     a {
       color: #e4eddb;
-    }
-  }
-  &__linking {
-    justify-self: end;
-    list-style: none;
-    img {
-      max-width: 35px;
-      vertical-align: middle;
+      font-weight: 600;
+      text-decoration: none;
     }
   }
 }
