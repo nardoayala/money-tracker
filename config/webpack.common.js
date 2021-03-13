@@ -17,6 +17,9 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      Images: [`${paths.src}/images`],
+    },
   },
 
   // Customize the webpack build process
@@ -40,8 +43,8 @@ module.exports = {
     // Generates an HTML file from a template
     // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
     new HtmlWebpackPlugin({
-      title: 'React Boilerplate',
-      favicon: `${paths.src}/images/favicon.png`,
+      title: 'Money Tracker',
+      favicon: `${paths.src}/images/logo.png`,
       template: `${paths.src}/template.html`, // template file
       filename: 'index.html', // output file
     }),

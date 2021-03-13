@@ -1,0 +1,30 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  background-color: #307672;
+  color: #e4eddb;
+  &__container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 85% 15%;
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+  }
+  &__copyright {
+    justify-self: center;
+    a {
+      color: #e4eddb;
+    }
+  }
+  &__linking {
+    justify-self: end;
+    list-style: none;
+    img {
+      max-width: 35px;
+      vertical-align: middle;
+    }
+  }
+}

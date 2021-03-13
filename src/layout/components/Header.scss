@@ -1,0 +1,26 @@
+.header {
+  padding: 15px 0;
+  background-color: #307672;
+  color: #e4eddb;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+  }
+  &__brand {
+    display: flex;
+    align-items: center;
+    img {
+      max-width: 24px;
+      margin-right: 10px;
+    }
+  }
+  &__nav {
+    ul {
+      list-style: none;
+    }
+  }
+}
