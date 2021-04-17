@@ -19,6 +19,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       Images: [`${paths.src}/images`],
+      Styles: [`${paths.src}/styles`],
+      Components: [`${paths.src}/components`],
+      Containers: [`${paths.src}/containers`],
     },
   },
 
