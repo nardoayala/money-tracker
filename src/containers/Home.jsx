@@ -1,5 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import MonthSelector from '../components/MonthSelector';
 
-const Home = () => <h1>I&apos;m a home page</h1>;
+const Home = () => (
+  <>
+    <h1>This is the homepage</h1>
+    <MonthSelector />
+  </>
+);
 
 export default Home;
