@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
-import MonthSelector from '../components/MonthSelector';
+import MonthSelector from 'Components/MonthSelector';
 
 const Home = () => (
   <>
-    <h1>This is the homepage</h1>
     <MonthSelector />
   </>
 );

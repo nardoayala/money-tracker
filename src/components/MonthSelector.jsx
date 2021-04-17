@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'Styles/components/MonthSelector.scss';
 
 class MonthSelector extends Component {
   constructor(props) {
@@ -36,18 +37,18 @@ class MonthSelector extends Component {
 
       return (
         <div className="month-selector">
-          <label htmlFor="monthSelector">
-            Select month:
-            <select
-              name="monthSelector"
-              id="monthSelector"
-              defaultValue={selectedMonth}
-            >
-              { months.map((month) => (
-                <option value={month} key={month}>{month}</option>
-              ))}
-            </select>
-          </label>
+          <select
+            name="monthSelector"
+            id="monthSelector"
+            defaultValue={selectedMonth}
+          >
+            { months.map((month, index) => {
+              if (index <= currentMonth) {
+                return <option value={month} key={month}>{month}</option>;
+              }
+              return null;
+            })}
+          </select>
         </div>
       );
     };
