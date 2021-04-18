@@ -42,9 +42,13 @@ class MonthSelector extends Component {
             id="monthSelector"
             defaultValue={selectedMonth}
           >
-            { months.map((month, index) => {
+            {months.map((month, index) => {
               if (index <= currentMonth) {
-                return <option value={month} key={month}>{month}</option>;
+                return (
+                  <option value={month} key={month}>
+                    {month}
+                  </option>
+                );
               }
               return null;
             })}
@@ -53,9 +57,7 @@ class MonthSelector extends Component {
       );
     };
 
-    return (
-      <MonthInput />
-    );
+    return <MonthInput />;
   }
 }
 

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
-    "lint": "eslint --fix src/**/*.jsx"
+    "lint": "eslint --fix src/**/*.{jsx,js}",
+    "format": "prettier --write src/**/*.{html,sass,js,jsx}"
   },
   "repository": {
     "type": "git",
