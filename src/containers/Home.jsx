@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import MonthSelector from 'Components/MonthSelector';
 import PieChart from 'Components/PieChart';
 
