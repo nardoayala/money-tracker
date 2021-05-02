@@ -40,6 +40,7 @@ class PieChart extends Component {
     // Add data
     chart.data = data;
     chart.radius = am4core.percent(65);
+    chart.numberFormatter.numberFormat = '#.';
 
     // Add and configure Series
     const pieSeries = chart.series.push(new am4charts.PieSeries());
