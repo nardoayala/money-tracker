@@ -12,12 +12,12 @@ class PieChart extends Component {
     super(props);
     this.state = {
       data: [
-        { category: 'Food', value: 150 },
-        { category: 'Subscriptions', value: 17.22 },
-        { category: 'Liquor', value: 15 },
-        { category: 'Tech', value: 80 },
-        { category: 'Pets', value: 25 },
-        { category: 'Books', value: 12 },
+        { category: 'Food', value: 150, icon: 'restaurant' },
+        { category: 'Subscriptions', value: 17.22, icon: 'language' },
+        { category: 'Liquor', value: 15, icon: 'liquor' },
+        { category: 'Tech', value: 80, icon: 'devices' },
+        { category: 'Pets', value: 25, icon: 'pets' },
+        { category: 'Books', value: 12, icon: 'book' },
       ],
     };
   }
@@ -39,13 +39,7 @@ class PieChart extends Component {
 
     // Add data
     chart.data = data;
-
-    // Add Legend
-    chart.legend = new am4charts.Legend();
-    chart.legend.position = 'bottom';
-    chart.legend.maxHeight = 150;
-    chart.legend.scrollable = true;
-    chart.legend.equalWidths = true;
+    chart.radius = am4core.percent(65);
 
     // Add and configure Series
     const pieSeries = chart.series.push(new am4charts.PieSeries());
@@ -54,7 +48,16 @@ class PieChart extends Component {
     pieSeries.slices.template.stroke = am4core.color('#fff');
     pieSeries.slices.template.strokeOpacity = 1;
     pieSeries.slices.template.tooltipText = '{category} : {value.percent}%';
-    pieSeries.labels.template.disabled = true;
+
+    // Labels
+    pieSeries.labels.template.html = '<span class="material-icons">{icon}</span>';
+    pieSeries.labels.template.maxWidth = 130;
+    pieSeries.labels.template.wrap = true;
+    pieSeries.alignLabels = false;
+    pieSeries.ticks.template.stroke = '#111';
+    pieSeries.ticks.template.strokeOpacity = 0.7;
+    pieSeries.ticks.template.strokeWidth = 2;
+
     pieSeries.colors.list = [
       am4core.color('rgba(255, 99, 132, 1)'),
       am4core.color('rgba(54, 162, 235, 1)'),
