@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddModal from 'Components/AddModal';
+import InputModal from 'Components/InputModal';
 import 'Styles/components/AddButtons.scss';
 
 const AddButtons = () => {
@@ -8,8 +8,16 @@ const AddButtons = () => {
 
   const handleClick = (event) => {
     const { name } = event.target;
-    setType(name);
-    setShowModal(true);
+    if (name) {
+      setType(name);
+    }
+    const inputModal = document.querySelector('.input-modal');
+    if (!showModal) {
+      inputModal.style.top = '0';
+    } else {
+      inputModal.style.top = '120%';
+    }
+    setShowModal(!showModal);
   };
 
   return (
@@ -32,7 +40,7 @@ const AddButtons = () => {
           +
         </button>
       </div>
-      {showModal ? <AddModal type={type} /> : null}
+      <InputModal type={type} handleClick={handleClick} />
     </>
   );
 };

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import 'Styles/components/AddModal.scss';
+import 'Styles/components/InputModal.scss';
 
-class AddModal extends Component {
+class InputModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       category: '',
       ammount: '',
-      type: 'expense',
+      type: '',
     };
+
+    this.handleAmmountInput = this.handleAmmountInput.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
 
   handleAmmountInput(event) {
@@ -42,8 +45,11 @@ class AddModal extends Component {
       'Pets',
     ];
 
+    const { handleClick } = this.props;
+
     return (
-      <div className="add-modal">
+      <div className="input-modal">
+        <button type="button" onClick={handleClick}>⇽</button>
         <label htmlFor="ammount">
           Ammount
           <input
@@ -75,4 +81,4 @@ class AddModal extends Component {
   }
 }
 
-export default AddModal;
+export default InputModal;
