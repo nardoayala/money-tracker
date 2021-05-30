@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import 'Styles/components/InputModal.scss';
 
 class InputModal extends Component {
@@ -8,7 +9,6 @@ class InputModal extends Component {
     this.state = {
       category: '',
       ammount: '',
-      type: '',
     };
 
     this.handleAmmountInput = this.handleAmmountInput.bind(this);
@@ -17,6 +17,16 @@ class InputModal extends Component {
 
   handleAmmountInput(event) {
     const { value } = event.target;
+    const valueArray = value.split('.');
+    const isNumber = /^[0-9]$/i.test(event.key);
+    if (valueArray[0].length > 6 && isNumber) {
+      event.preventDefault();
+    }
+    if (valueArray[1]) {
+      if (valueArray[1].length > 1 && isNumber) {
+        event.preventDefault();
+      }
+    }
     this.setState({ ammount: value });
   }
 
@@ -26,7 +36,8 @@ class InputModal extends Component {
   }
 
   handleSave = () => {
-    const { category, ammount, type } = this.state;
+    const { category, ammount } = this.state;
+    const { type } = this.props;
     const newEntry = {
       category,
       ammount,
@@ -45,40 +56,61 @@ class InputModal extends Component {
       'Pets',
     ];
 
-    const { handleClick } = this.props;
+    const { handleClick, type } = this.props;
 
     return (
       <div className="input-modal">
-        <button type="button" onClick={handleClick}>⇽</button>
-        <label htmlFor="ammount">
-          Ammount
-          <input
-            id="ammount"
-            name="ammount"
-            type="number"
-            onChange={this.handleAmmountInput}
-          />
-        </label>
-        <label htmlFor="categorySelector">
-          Category
+        <div className="input-modal__header">
+          <div className="input-modal__header__container">
+            <button className="exit-button" type="button" onClick={handleClick}>
+              ⇽
+            </button>
+            {type ? <span>{`New ${type}`}</span> : null}
+          </div>
+        </div>
+        <div className="input-modal__container">
+          <div className="input-modal__input-group">
+            <span className="input-modal__input-icon">$</span>
+            <input
+              className="input-modal__input"
+              id="ammount"
+              name="ammount"
+              type="number"
+              onKeyDown={this.handleAmmountInput}
+            />
+          </div>
           <select
-            name="categorySelector"
+            className="input-modal__input"
             id="categorySelector"
+            name="categorySelector"
+            defaultValue="Select a category"
             onChange={this.handleCategoryChange}
           >
+            <option disabled>
+              Select a category
+            </option>
             {expensesCategories.map((category) => (
               <option value={category} key={category}>
                 {category}
               </option>
             ))}
           </select>
-        </label>
-        <button type="button" onClick={this.handleSave}>
-          Save
-        </button>
+          <button
+            className="save-button"
+            type="button"
+            onClick={this.handleSave}
+          >
+            Save
+          </button>
+        </div>
       </div>
     );
   }
 }
+
+InputModal.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+};
 
 export default InputModal;

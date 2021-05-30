@@ -1,3 +1,13 @@
+// Hide arrows for incrementing number input
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
 .input-modal {
   display: flex;
   flex-direction: column;
@@ -11,4 +21,68 @@
   z-index: 1;
   background-color: white;
   transition: all 0.5s ease-in-out;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 60%;
+    margin: 3rem auto;
+    gap: 60px;
+  }
+  &__header {
+    width: 100%;
+    padding: 15px 0;
+    background-color: #307672;
+    color: white;
+    &__container {
+      display: flex;
+      align-items: center;
+      width: 90%;
+      margin: auto;
+    }
+    .exit-button {
+      background: none;
+      padding: 0;
+      margin-right: 15px;
+      color: white;
+      border: none;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+  }
+  &__input-group {
+    position: relative;
+  }
+  &__input {
+    padding: 8px 12px;
+    width: 100%;
+    border: 1px solid #307672;
+    border-radius: 8px;
+    background-color: white;
+    text-align: center;
+  }
+  &__input-icon {
+    position: absolute;
+    padding: 9px 12px;
+    border-right: 1px solid #307672;
+    background-color: #307672;
+    color: white;
+    border-radius: 8px 0 0 8px;
+    font-weight: 600;
+  }
+  label {
+    display: flex;
+    align-items: flex-end;
+    font-size: 1.3rem;
+    gap: 2rem;
+    font-weight: 600;
+    color: #307672;
+  }
+  .save-button {
+    padding: 12px 16px;
+    border: 1px solid #307672;
+    border-radius: 8px;
+    background-color: #307672;
+    color: white;
+  }
 }
