@@ -56,7 +56,7 @@ class PieChart extends Component {
 
     // Legends
     chart.legend = new am4charts.Legend();
-    chart.legend.maxHeight = 100;
+    chart.legend.maxHeight = 150;
     chart.legend.scrollable = true;
 
     pieSeries.colors.list = [

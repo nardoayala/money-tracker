@@ -41,13 +41,17 @@ input[type='number'] {
       margin: auto;
     }
     .exit-button {
+      display: flex;
       background: none;
       padding: 0;
-      margin-right: 15px;
+      margin-right: 8px;
       color: white;
       border: none;
       font-size: 2rem;
       font-weight: 600;
+      img {
+        vertical-align: middle;
+      }
     }
   }
   &__input-group {

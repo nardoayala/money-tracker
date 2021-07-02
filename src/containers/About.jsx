@@ -6,16 +6,13 @@ const About = () => (
   <div className="about">
     <h1 className="about__title">What is this?</h1>
     <div className="about__description">
-      <p>This is a simple expenses tracking app built with React.</p>
       <p>
-        I made this because I wanted to get familiar with the
+        This is a simple expenses tracking app built with React. I made it because I wanted
+        to get familiar with the
         {' '}
         <a href="https://www.amcharts.com/">amCharts</a>
         {' '}
-        Javascript library for charts.
-      </p>
-      <p>
-        I got inspired by
+        Javascript library for building charts. I got inspired by
         {' '}
         <a href="https://monefy.me/">Monefy</a>
         {' '}
@@ -23,7 +20,7 @@ const About = () => (
       </p>
     </div>
     <div className="about__acknowledgements">
-      <h3>Acknowledgements:</h3>
+      <h2>Acknowledgements:</h2>
       <ul>
         <li>
           <a href="https://icons8.com/">Icons8</a>

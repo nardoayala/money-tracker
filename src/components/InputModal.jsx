@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import 'Styles/components/InputModal.scss';
+import LeftArrow from 'Images/left-arrow.png';
 
 class InputModal extends Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class InputModal extends Component {
         <div className="input-modal__header">
           <div className="input-modal__header__container">
             <button className="exit-button" type="button" onClick={handleClick}>
-              ⇽
+              <img src={LeftArrow} alt="" />
             </button>
             {type ? <span>{`New ${type}`}</span> : null}
           </div>

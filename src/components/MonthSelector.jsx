@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import 'Styles/components/MonthSelector.scss';
 
 class MonthSelector extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentMonth: '' };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    const today = new Date();
-    const month = today.getMonth();
-    this.setState({
-      currentMonth: month,
-    });
+  handleChange(event) {
+    const { handleMonthSelector } = this.props;
+    handleMonthSelector(event.target.value);
   }
 
   render() {
-    const { currentMonth } = this.state;
+    const { month } = this.props;
 
     const MonthInput = () => {
       const months = [
@@ -33,20 +31,22 @@ class MonthSelector extends Component {
         'November',
         'December',
       ];
-      const selectedMonth = months[currentMonth];
+      const today = new Date();
+      const currentMonthIndex = today.getMonth();
 
       return (
         <div className="month-selector">
           <select
             name="monthSelector"
             id="monthSelector"
-            defaultValue={selectedMonth}
+            defaultValue={month}
+            onChange={this.handleChange}
           >
-            {months.map((month, index) => {
-              if (index <= currentMonth) {
+            {months.map((item, index) => {
+              if (index <= currentMonthIndex) {
                 return (
-                  <option value={month} key={month}>
-                    {month}
+                  <option value={item} key={item}>
+                    {item}
                   </option>
                 );
               }
@@ -60,5 +60,10 @@ class MonthSelector extends Component {
     return <MonthInput />;
   }
 }
+
+MonthSelector.propTypes = {
+  month: PropTypes.string.isRequired,
+  handleMonthSelector: PropTypes.func.isRequired,
+};
 
 export default MonthSelector;
