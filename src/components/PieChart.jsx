@@ -21,17 +21,17 @@ class PieChart extends Component {
               category: 'Food',
               entries: [
                 {
-                  date: '03-01',
+                  date: '01-03-21',
                   description: 'Meat',
                   ammount: 20,
                 },
                 {
-                  date: '12-01',
+                  date: '01-12-21',
                   description: 'Bread',
                   ammount: 5,
                 },
                 {
-                  date: '15-01',
+                  date: '01-15-21',
                   description: 'Groceries',
                   ammount: 35,
                 },
@@ -41,12 +41,12 @@ class PieChart extends Component {
               category: 'Subscriptions',
               entries: [
                 {
-                  date: '01-01',
+                  date: '01-01-21',
                   description: 'Patreon',
                   ammount: 15,
                 },
                 {
-                  date: '22-01',
+                  date: '01-22-21',
                   description: 'Prime Video',
                   ammount: 5.99,
                 },
@@ -58,7 +58,7 @@ class PieChart extends Component {
               category: 'Salary',
               entries: [
                 {
-                  date: '31-01',
+                  date: '01-31-21',
                   description: 'Fivent',
                   ammount: 700,
                 },

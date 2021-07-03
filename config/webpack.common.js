@@ -20,6 +20,7 @@ module.exports = {
     alias: {
       Images: [`${paths.src}/images`],
       Styles: [`${paths.src}/styles`],
+      Utils: [`${paths.src}/utils`],
       Components: [`${paths.src}/components`],
       Containers: [`${paths.src}/containers`],
     },

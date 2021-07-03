@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import formatDate from 'Utils/formatDate';
 import 'Styles/components/InputModal.scss';
 import LeftArrow from 'Images/left-arrow.png';
 
@@ -10,25 +11,31 @@ class InputModal extends Component {
     this.state = {
       category: '',
       ammount: '',
+      date: formatDate(new Date()),
     };
 
     this.handleAmmountInput = this.handleAmmountInput.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    this.handleDateInput = this.handleDateInput.bind(this);
   }
 
   handleAmmountInput(event) {
     const { value } = event.target;
     const valueArray = value.split('.');
-    const isNumber = /^[0-9]$/i.test(event.key);
-    if (valueArray[0].length > 6 && isNumber) {
-      event.preventDefault();
+    if (valueArray[0].length > 6) {
+      return;
     }
     if (valueArray[1]) {
-      if (valueArray[1].length > 1 && isNumber) {
-        event.preventDefault();
+      if (valueArray[1].length > 2) {
+        return;
       }
     }
     this.setState({ ammount: value });
+  }
+
+  handleDateInput(event) {
+    const { value } = event.target;
+    this.setState({ date: value });
   }
 
   handleCategoryChange(event) {
@@ -37,11 +44,12 @@ class InputModal extends Component {
   }
 
   handleSave = () => {
-    const { category, ammount } = this.state;
+    const { category, ammount, date } = this.state;
     const { type } = this.props;
     const newEntry = {
       category,
       ammount,
+      date,
       type,
     };
     console.log(newEntry);
@@ -58,6 +66,7 @@ class InputModal extends Component {
     ];
 
     const { handleClick, type } = this.props;
+    const { ammount, date } = this.state;
 
     return (
       <div className="input-modal">
@@ -77,7 +86,18 @@ class InputModal extends Component {
               id="ammount"
               name="ammount"
               type="number"
-              onKeyDown={this.handleAmmountInput}
+              value={ammount}
+              onChange={this.handleAmmountInput}
+            />
+          </div>
+          <div className="input-modal__input-group">
+            <input
+              className="input-modal__input"
+              id="date"
+              name="date"
+              type="date"
+              value={date}
+              onChange={this.handleDateInput}
             />
           </div>
           <select
