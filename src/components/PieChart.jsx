@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 // eslint-disable-next-line camelcase
@@ -13,23 +14,80 @@ class PieChart extends Component {
 
     this.state = {
       data: [
-        { category: 'Food', value: 150 },
-        { category: 'Subscriptions', value: 17.22 },
-        { category: 'Liquor', value: 15 },
-        { category: 'Tech', value: 80 },
-        { category: 'Pets', value: 25 },
-        { category: 'Books', value: 12 },
+        {
+          month: 'January',
+          expenses: [
+            {
+              category: 'Food',
+              entries: [
+                {
+                  date: '03-01',
+                  description: 'Meat',
+                  ammount: 20,
+                },
+                {
+                  date: '12-01',
+                  description: 'Bread',
+                  ammount: 5,
+                },
+                {
+                  date: '15-01',
+                  description: 'Groceries',
+                  ammount: 35,
+                },
+              ],
+            },
+            {
+              category: 'Subscriptions',
+              entries: [
+                {
+                  date: '01-01',
+                  description: 'Patreon',
+                  ammount: 15,
+                },
+                {
+                  date: '22-01',
+                  description: 'Prime Video',
+                  ammount: 5.99,
+                },
+              ],
+            },
+          ],
+          incomes: [
+            {
+              category: 'Salary',
+              entries: [
+                {
+                  date: '31-01',
+                  description: 'Fivent',
+                  ammount: 700,
+                },
+              ],
+            },
+          ],
+        },
       ],
     };
   }
 
-  componentDidMount() {
-    this.generateChart();
+  generateExpensesData() {
+    const { data } = this.state;
+    const { month } = this.props;
+    const expenses = [];
+    const monthData = data.filter((item) => item.month === month);
+    if (monthData.length !== 0) {
+      monthData[0].expenses.forEach((expense) => {
+        let sum = 0;
+        expense.entries.forEach((entry) => {
+          sum += entry.ammount;
+        });
+        expenses.push({ category: expense.category, value: sum.toFixed(2) });
+      });
+    }
+    return expenses;
   }
 
   generateChart() {
-    const { data } = this.state;
-
     const container = am4core.create('chartdiv', am4core.Container);
     container.width = am4core.percent(100);
     container.height = am4core.percent(100);
@@ -39,7 +97,7 @@ class PieChart extends Component {
     const chart = container.createChild(am4charts.PieChart);
 
     // Add data
-    chart.data = data;
+    chart.data = this.generateExpensesData();
     // chart.radius = am4core.percent(80);
     chart.numberFormatter.numberFormat = '#.';
 
@@ -81,5 +139,9 @@ class PieChart extends Component {
     return <div id="chartdiv" className="pie-chart" />;
   }
 }
+
+PieChart.propTypes = {
+  month: PropTypes.string.isRequired,
+};
 
 export default PieChart;
