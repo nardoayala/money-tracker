@@ -97,7 +97,22 @@ class PieChart extends Component {
     const chart = container.createChild(am4charts.PieChart);
 
     // Add data
-    chart.data = this.generateExpensesData();
+    let data = this.generateExpensesData();
+    let colorsArray = [
+      am4core.color('rgba(255, 99, 132, 1)'),
+      am4core.color('rgba(54, 162, 235, 1)'),
+      am4core.color('rgba(255, 206, 86, 1)'),
+      am4core.color('rgba(75, 192, 192, 1)'),
+      am4core.color('rgba(153, 102, 255, 1)'),
+      am4core.color('rgba(255, 159, 64, 1)'),
+    ];
+    if (data.length === 0) {
+      data = [{ category: 'No data', value: '100' }];
+      colorsArray = [am4core.color('rgba(194,197,204,1)')];
+    }
+
+    chart.data = data;
+
     // chart.radius = am4core.percent(80);
     chart.numberFormatter.numberFormat = '#.';
 
@@ -117,14 +132,7 @@ class PieChart extends Component {
     chart.legend.maxHeight = 150;
     chart.legend.scrollable = true;
 
-    pieSeries.colors.list = [
-      am4core.color('rgba(255, 99, 132, 1)'),
-      am4core.color('rgba(54, 162, 235, 1)'),
-      am4core.color('rgba(255, 206, 86, 1)'),
-      am4core.color('rgba(75, 192, 192, 1)'),
-      am4core.color('rgba(153, 102, 255, 1)'),
-      am4core.color('rgba(255, 159, 64, 1)'),
-    ];
+    pieSeries.colors.list = colorsArray;
 
     // This creates initial animation
     pieSeries.hiddenState.properties.opacity = 1;
