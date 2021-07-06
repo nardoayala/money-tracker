@@ -9,70 +9,8 @@ import 'Styles/components/PieChart.scss';
 am4core.useTheme(am4themes_animated);
 
 class PieChart extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: [
-        {
-          month: 'January',
-          expenses: [
-            {
-              category: 'Food',
-              entries: [
-                {
-                  date: '01-03-21',
-                  description: 'Meat',
-                  ammount: 20,
-                },
-                {
-                  date: '01-12-21',
-                  description: 'Bread',
-                  ammount: 5,
-                },
-                {
-                  date: '01-15-21',
-                  description: 'Groceries',
-                  ammount: 35,
-                },
-              ],
-            },
-            {
-              category: 'Subscriptions',
-              entries: [
-                {
-                  date: '01-01-21',
-                  description: 'Patreon',
-                  ammount: 15,
-                },
-                {
-                  date: '01-22-21',
-                  description: 'Prime Video',
-                  ammount: 5.99,
-                },
-              ],
-            },
-          ],
-          incomes: [
-            {
-              category: 'Salary',
-              entries: [
-                {
-                  date: '01-31-21',
-                  description: 'Fivent',
-                  ammount: 700,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-  }
-
   generateExpensesData() {
-    const { data } = this.state;
-    const { month } = this.props;
+    const { month, data } = this.props;
     const expenses = [];
     const monthData = data.filter((item) => item.month === month);
     if (monthData.length !== 0) {
@@ -150,6 +88,7 @@ class PieChart extends Component {
 
 PieChart.propTypes = {
   month: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default PieChart;
