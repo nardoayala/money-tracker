@@ -69,6 +69,7 @@ class Home extends Component {
     this.setState({
       data,
     });
+    localStorage.setItem('data', JSON.stringify(data));
   }
 
   getCurrentMonth() {
