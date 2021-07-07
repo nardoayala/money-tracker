@@ -39,9 +39,9 @@ class Home extends Component {
     } = newEntry;
     const month = (new Date(date)).getMonth();
 
+    let categoryFound = false;
     if (type === 'expense') {
       const { expenses } = data[month];
-      let categoryFound = false;
       expenses.forEach((expense) => {
         if (expense.category === category) {
           categoryFound = true;
@@ -54,6 +54,32 @@ class Home extends Component {
       });
       if (!categoryFound) {
         expenses.push(
+          {
+            category,
+            entries: [{
+              date,
+              ammount,
+              description,
+            }],
+          },
+        );
+      }
+    }
+
+    if (type === 'income') {
+      const { incomes } = data[month];
+      incomes.forEach((income) => {
+        if (income.category === category) {
+          categoryFound = true;
+          income.entries.push({
+            date,
+            ammount,
+            description,
+          });
+        }
+      });
+      if (!categoryFound) {
+        incomes.push(
           {
             category,
             entries: [{

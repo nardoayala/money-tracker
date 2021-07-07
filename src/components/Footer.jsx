@@ -8,7 +8,7 @@ const Footer = () => (
         <span>
           Made with ♥ by
           {' '}
-          <a href="https://bernardoayala.com">nardoyala</a>
+          <a href="https://bernardoayala.com" target="_blank" rel="noreferrer">nardoyala</a>
         </span>
       </div>
     </div>
