@@ -4,14 +4,16 @@ import 'Styles/components/InputModal.scss';
 import LeftArrow from 'Images/left-arrow.png';
 
 const formatDate = (date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
   const year = date.getFullYear();
 
-  if (month >= 10) {
-    return `${year}-${month}-0${day}`;
+  if (month <= 10) {
+    month = `0${month}`;
+  } if (day <= 10) {
+    day = `0${day}`;
   }
-  return `${year}-0${month}-0${day}`;
+  return `${year}-${month}-${day}`;
 };
 
 const initialState = {
