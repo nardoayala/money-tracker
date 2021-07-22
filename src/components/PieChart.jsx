@@ -17,7 +17,7 @@ class PieChart extends Component {
       monthData[0].expenses.forEach((expense) => {
         let sum = 0;
         expense.entries.forEach((entry) => {
-          sum += entry.ammount;
+          sum += entry.amount;
         });
         expenses.push({ category: expense.category, value: sum.toFixed(2) });
       });
