@@ -60,15 +60,37 @@ class PieChart extends Component {
     pieSeries.dataFields.category = 'category';
     pieSeries.slices.template.stroke = am4core.color('#fff');
     pieSeries.slices.template.strokeOpacity = 1;
-    pieSeries.slices.template.tooltipText = '{category} : {value.percent}%';
+    pieSeries.slices.template.tooltipText = '{category}';
 
     // Labels
-    pieSeries.labels.template.disabled = true;
+    pieSeries.legendSettings.labelText = '{name}[/]';
+    pieSeries.legendSettings.valueText = "$ {value.formatNumber('#.0')}[/]";
+    pieSeries.ticks.template.disabled = true;
+    pieSeries.alignLabels = false;
+    pieSeries.labels.template.text = "[bold]{value.percent.formatNumber('#.0')}%";
+    pieSeries.labels.template.radius = am4core.percent(-40);
+    pieSeries.labels.template.fill = am4core.color('white');
+
+    pieSeries.labels.template.adapter.add('radius', (radius, target) => {
+      if (target.dataItem && (target.dataItem.values.value.percent < 10)) {
+        return 0;
+      }
+      return radius;
+    });
+
+    pieSeries.labels.template.adapter.add('fill', (color, target) => {
+      if (target.dataItem && (target.dataItem.values.value.percent < 10)) {
+        return am4core.color('#000');
+      }
+      return color;
+    });
 
     // Legends
     chart.legend = new am4charts.Legend();
-    chart.legend.maxHeight = 150;
+    chart.legend.maxHeight = 120;
     chart.legend.scrollable = true;
+    chart.legend.labels.template.minWidth = 130;
+    chart.legend.valueLabels.template.minWidth = 20;
 
     pieSeries.colors.list = colorsArray;
 
@@ -76,6 +98,11 @@ class PieChart extends Component {
     pieSeries.hiddenState.properties.opacity = 1;
     pieSeries.hiddenState.properties.endAngle = -90;
     pieSeries.hiddenState.properties.startAngle = -90;
+
+    // Disabling hover animation
+    const slice = pieSeries.slices.template;
+    slice.states.getKey('hover').properties.scale = 1;
+    slice.states.getKey('active').properties.shiftRadius = 0;
 
     chart.hiddenState.properties.radius = am4core.percent(0);
   }
