@@ -7,7 +7,7 @@ This is a simple expenses tracking app built with React. I made it because I wan
 It stores all the data in the localhost, so you'll data will be persistent until you clean it.
 
 ## Demo
-You can have a look on https://app.netlify.com/sites/nardoyala-money-tracker/overview
+You can have a look on https://nardoyala-money-tracker.netlify.app/
 
 ![Screenshot](https://raw.githubusercontent.com/nardoyala/money-tracker/main/images/screenshot.png)
 
