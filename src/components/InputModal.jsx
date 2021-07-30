@@ -18,7 +18,7 @@ const formatDate = (date) => {
 
 const initialState = {
   category: '',
-  ammount: '',
+  amount: '',
   description: '',
   date: formatDate(new Date()),
 };
@@ -35,7 +35,7 @@ class InputModal extends Component {
   handleInput(event) {
     const { name, value } = event.target;
     const stateObject = {};
-    if (name === 'ammount') {
+    if (name === 'amount') {
       const valueArray = value.split('.');
       if (valueArray[0].length > 6) {
         return;
@@ -78,14 +78,14 @@ class InputModal extends Component {
   handleSave = () => {
     const {
       category,
-      ammount,
+      amount,
       date,
       description,
     } = this.state;
     const { type, handleNewEntry, handleModal } = this.props;
     const newEntry = {
       category,
-      ammount: Number(ammount),
+      amount: Number(amount),
       date,
       type,
       description,
@@ -97,7 +97,7 @@ class InputModal extends Component {
 
   render() {
     const { handleModal, type } = this.props;
-    const { ammount, date, description } = this.state;
+    const { amount, date, description } = this.state;
     const categories = this.getCategories();
 
     return (
@@ -115,10 +115,10 @@ class InputModal extends Component {
             <span className="input-modal__input-icon">$</span>
             <input
               className="input-modal__input"
-              id="ammount"
-              name="ammount"
+              id="amount"
+              name="amount"
               type="number"
-              value={ammount}
+              value={amount}
               onChange={this.handleInput}
             />
           </div>
