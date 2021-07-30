@@ -2,7 +2,14 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A simple app to track expenses.
+This is a simple expenses tracking app built with React. I made it because I wanted to get familiar with the [amCharts](https://www.amcharts.com/) Javascript library for building charts. I got inspired by [Monefy](https://monefy.me/) , one of my favorite apps.
+
+It stores all the data in the localhost, so you'll data will be persistent until you clean it.
+
+## Demo
+You can have a look on https://app.netlify.com/sites/nardoyala-money-tracker/overview
+
+![Screenshot](https://raw.githubusercontent.com/nardoyala/money-tracker/main/images/screenshot.png)
 
 ## Installation
 
