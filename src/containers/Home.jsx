@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MonthSelector from 'Components/MonthSelector';
 import PieChart from 'Components/PieChart';
 import AddButtons from 'Components/AddButtons';
+import BalanceLabel from 'Components/BalanceLabel';
 
 class Home extends Component {
   constructor(props) {
@@ -34,10 +35,10 @@ class Home extends Component {
       type,
       category,
       date,
-      ammount,
+      amount,
       description,
     } = newEntry;
-    const month = (new Date(date)).getMonth();
+    const month = new Date(date).getMonth();
 
     let categoryFound = false;
     if (type === 'expense') {
@@ -47,22 +48,22 @@ class Home extends Component {
           categoryFound = true;
           expense.entries.push({
             date,
-            ammount,
+            amount,
             description,
           });
         }
       });
       if (!categoryFound) {
-        expenses.push(
-          {
-            category,
-            entries: [{
+        expenses.push({
+          category,
+          entries: [
+            {
               date,
-              ammount,
+              amount,
               description,
-            }],
-          },
-        );
+            },
+          ],
+        });
       }
     }
 
@@ -73,22 +74,22 @@ class Home extends Component {
           categoryFound = true;
           income.entries.push({
             date,
-            ammount,
+            amount,
             description,
           });
         }
       });
       if (!categoryFound) {
-        incomes.push(
-          {
-            category,
-            entries: [{
+        incomes.push({
+          category,
+          entries: [
+            {
               date,
-              ammount,
+              amount,
               description,
-            }],
-          },
-        );
+            },
+          ],
+        });
       }
     }
 
@@ -219,16 +220,71 @@ class Home extends Component {
     this.setState({ data });
   }
 
+  getTotals() {
+    const { data, month } = this.state;
+    let totalExpenses = 0;
+    let totalIncomes = 0;
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    if (data.length > 0) {
+      const monthIndex = months.indexOf(month);
+      const { expenses, incomes } = data[monthIndex];
+
+      if (expenses.length > 0) {
+        expenses.forEach((expense) => {
+          const { entries } = expense;
+          entries.forEach((entry) => {
+            totalExpenses += entry.amount;
+          });
+        });
+      }
+      if (incomes.length > 0) {
+        incomes.forEach((income) => {
+          const { entries } = income;
+          entries.forEach((entry) => {
+            totalIncomes += entry.amount;
+          });
+        });
+      }
+    }
+    return ({
+      totalExpenses,
+      totalIncomes,
+    });
+  }
+
   render() {
     const { month, categories, data } = this.state;
+    const { totalExpenses, totalIncomes } = this.getTotals();
     return (
       <>
         <MonthSelector
           month={month}
           handleMonthSelector={this.handleMonthSelector}
         />
+        <BalanceLabel
+          totalExpenses={totalExpenses}
+          totalIncomes={totalIncomes}
+        />
         <PieChart month={month} data={data} />
-        <AddButtons categories={categories} data={data} handleNewEntry={this.handleNewEntry} />
+        <AddButtons
+          categories={categories}
+          data={data}
+          handleNewEntry={this.handleNewEntry}
+        />
       </>
     );
   }
