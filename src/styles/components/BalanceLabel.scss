@@ -1,21 +1,26 @@
-.balance-label {
+.balance {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 25px auto -50px auto;
-  max-width: 200px;
-  h4 {
-    margin: 5px 0;
-    font-size: .9rem;
-  }
-  span {
-    flex: 1;
-    overflow: hidden;
-  }
-  &__expenses {
-    // background-color: #d64541;
-  }
-  &__incomes {
-    // background-color: #1e824c;
+  margin: 25px auto -15px auto;
+  padding: 8px 12px;
+  max-width: 220px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  &__label {
+    text-align: center;
+    font-weight: 600;
+    h4 {
+      margin: 0;
+      margin-bottom: 10px;
+      font-size: .9rem;
+      color: #444;
+    }
+    .red {
+      color: #d64541;
+    }
+    .green {
+      color: #1e824c;
+    }
   }
 }
