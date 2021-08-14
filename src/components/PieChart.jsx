@@ -97,6 +97,7 @@ const generateChart = (data) => {
   chart.legend.scrollable = true;
   chart.legend.labels.template.minWidth = 130;
   chart.legend.valueLabels.template.minWidth = 20;
+  chart.legend.itemContainers.template.paddingTop = 0;
 
   pieSeries.colors.list = colorsArray;
 

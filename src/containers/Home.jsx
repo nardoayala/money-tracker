@@ -272,7 +272,6 @@ class Home extends Component {
     return (
       <>
         <MonthSelector
-          month={month}
           handleMonthSelector={this.handleMonthSelector}
         />
         <BalanceLabel

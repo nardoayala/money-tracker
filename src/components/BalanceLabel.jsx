@@ -9,11 +9,11 @@ const BalanceLabel = (props) => {
     <div className="balance">
       <div className="balance__label">
         <h4>Incomes</h4>
-        <span className="green">{`$ ${totalExpenses}`}</span>
+        <span className="green">{`$ ${totalIncomes}`}</span>
       </div>
       <div className="balance__label">
         <h4>Expenses</h4>
-        <span className="red">{`$ ${totalIncomes}`}</span>
+        <span className="red">{`$ ${totalExpenses}`}</span>
       </div>
     </div>
   );
