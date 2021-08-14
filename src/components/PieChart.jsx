@@ -119,7 +119,7 @@ const PieChart = (props) => {
 
   useEffect(() => {
     setExpensesData(generateExpensesData(data, month));
-  }, [month]);
+  }, [props]);
 
   useEffect(() => {
     if (expensesData.length !== 0) {
