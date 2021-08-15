@@ -1,36 +1,144 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import MonthSelector from 'Components/MonthSelector';
 import PieChart from 'Components/PieChart';
 import AddButtons from 'Components/AddButtons';
 import BalanceLabel from 'Components/BalanceLabel';
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      month: '',
-      categories: [],
-      data: [],
-    };
-    this.handleMonthSelector = this.handleMonthSelector.bind(this);
-    this.getCurrentMonth = this.getCurrentMonth.bind(this);
-    this.handleNewEntry = this.handleNewEntry.bind(this);
-  }
+const getCurrentMonth = () => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const today = new Date();
+  const monthIndex = today.getMonth();
+  return months[monthIndex];
+};
 
-  componentDidMount() {
-    this.getData();
-    this.getCategories();
-    this.getCurrentMonth();
+const getCategories = () => {
+  let categories = [];
+  if (localStorage.getItem('categories')) {
+    categories = JSON.parse(localStorage.getItem('categories'));
+  } else {
+    categories = [
+      {
+        type: 'expenses',
+        categories: [
+          'Bills',
+          'Food',
+          'House',
+          'Services',
+          'Technology',
+          'Transport',
+        ],
+      },
+      {
+        type: 'incomes',
+        categories: ['Salary', 'Freelance'],
+      },
+    ];
+    localStorage.setItem('categories', JSON.stringify(categories));
   }
+  return categories;
+};
 
-  handleMonthSelector(month) {
-    this.setState({
-      month,
-    });
+const getData = () => {
+  let data = [];
+  if (localStorage.getItem('data')) {
+    data = JSON.parse(localStorage.getItem('data'));
+  } else {
+    data = [
+      {
+        month: 'January',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'February',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'March',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'April',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'May',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'June',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'July',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'August',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'September',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'October',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'November',
+        expenses: [],
+        incomes: [],
+      },
+      {
+        month: 'December',
+        expenses: [],
+        incomes: [],
+      },
+    ];
+    localStorage.setItem('data', JSON.stringify(data));
   }
+  return data;
+};
 
-  handleNewEntry(newEntry) {
-    const { data } = this.state;
+const Home = () => {
+  const [month, setMonth] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setMonth(getCurrentMonth());
+    setCategories(getCategories());
+    setData(getData());
+  }, []);
+
+  const handleMonthSelector = (selectorMonth) => {
+    setMonth(selectorMonth);
+  };
+
+  const handleNewEntry = (newEntry) => {
     const {
       type,
       category,
@@ -38,11 +146,11 @@ class Home extends Component {
       amount,
       description,
     } = newEntry;
-    const month = new Date(date).getMonth();
+    const currentMonthIndex = new Date(date).getMonth();
 
     let categoryFound = false;
     if (type === 'expense') {
-      const { expenses } = data[month];
+      const { expenses } = data[currentMonthIndex];
       expenses.forEach((expense) => {
         if (expense.category === category) {
           categoryFound = true;
@@ -68,7 +176,7 @@ class Home extends Component {
     }
 
     if (type === 'income') {
-      const { incomes } = data[month];
+      const { incomes } = data[currentMonthIndex];
       incomes.forEach((income) => {
         if (income.category === category) {
           categoryFound = true;
@@ -92,136 +200,12 @@ class Home extends Component {
         });
       }
     }
-
-    this.setState({
-      data,
-    });
+    const newData = [...data];
+    setData(newData);
     localStorage.setItem('data', JSON.stringify(data));
-  }
+  };
 
-  getCurrentMonth() {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    const today = new Date();
-    const month = today.getMonth();
-    this.setState({
-      month: months[month],
-    });
-  }
-
-  getCategories() {
-    let categories = [];
-    if (localStorage.getItem('categories')) {
-      categories = JSON.parse(localStorage.getItem('categories'));
-    } else {
-      categories = [
-        {
-          type: 'expenses',
-          categories: [
-            'Bills',
-            'Food',
-            'House',
-            'Services',
-            'Technology',
-            'Transport',
-          ],
-        },
-        {
-          type: 'incomes',
-          categories: ['Salary', 'Freelance'],
-        },
-      ];
-      localStorage.setItem('categories', JSON.stringify(categories));
-    }
-    this.setState({ categories });
-  }
-
-  getData() {
-    let data = [];
-    if (localStorage.getItem('data')) {
-      data = JSON.parse(localStorage.getItem('data'));
-    } else {
-      data = [
-        {
-          month: 'January',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'February',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'March',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'April',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'May',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'June',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'July',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'August',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'September',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'October',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'November',
-          expenses: [],
-          incomes: [],
-        },
-        {
-          month: 'December',
-          expenses: [],
-          incomes: [],
-        },
-      ];
-      localStorage.setItem('data', JSON.stringify(data));
-    }
-    this.setState({ data });
-  }
-
-  getTotals() {
-    const { data, month } = this.state;
+  const getTotals = () => {
     let totalExpenses = 0;
     let totalIncomes = 0;
     const months = [
@@ -260,33 +244,25 @@ class Home extends Component {
         });
       }
     }
-    return ({
+    return {
       totalExpenses,
       totalIncomes,
-    });
-  }
+    };
+  };
 
-  render() {
-    const { month, categories, data } = this.state;
-    const { totalExpenses, totalIncomes } = this.getTotals();
-    return (
-      <>
-        <MonthSelector
-          handleMonthSelector={this.handleMonthSelector}
-        />
-        <BalanceLabel
-          totalExpenses={totalExpenses}
-          totalIncomes={totalIncomes}
-        />
-        <PieChart month={month} data={data} />
-        <AddButtons
-          categories={categories}
-          data={data}
-          handleNewEntry={this.handleNewEntry}
-        />
-      </>
-    );
-  }
-}
+  const { totalExpenses, totalIncomes } = getTotals();
+  return (
+    <>
+      <MonthSelector handleMonthSelector={handleMonthSelector} />
+      <BalanceLabel totalExpenses={totalExpenses} totalIncomes={totalIncomes} />
+      <PieChart month={month} data={data} />
+      <AddButtons
+        categories={categories}
+        data={data}
+        handleNewEntry={handleNewEntry}
+      />
+    </>
+  );
+};
 
 export default Home;

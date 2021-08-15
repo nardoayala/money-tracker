@@ -48,7 +48,7 @@ const InputModal = (props) => {
     handleNewEntry,
   } = props;
 
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('default');
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
@@ -79,7 +79,7 @@ const InputModal = (props) => {
       setDescription(value);
     }
     if (name === 'date') {
-      setDate(formatDate(value));
+      setDate(value);
     }
   };
 
@@ -93,6 +93,9 @@ const InputModal = (props) => {
     };
     handleNewEntry(newEntry);
     handleModal();
+    setCategory('default');
+    setAmount('');
+    setDescription('');
   };
 
   return (
@@ -142,10 +145,10 @@ const InputModal = (props) => {
           className="input-modal__input"
           id="category"
           name="category"
-          defaultValue="Select a category"
+          value={category}
           onChange={handleInput}
         >
-          <option disabled>Select a category</option>
+          <option value="default" disabled>Select a category</option>
           {categoryOptions.map((item) => (
             <option value={item} key={item}>
               {item}
