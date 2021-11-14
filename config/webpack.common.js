@@ -60,8 +60,11 @@ module.exports = {
       // JavaScript: Use Babel to transpile JavaScript files
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'jsx', // Remove this if you're not using JSX
+          target: 'es2015', // Syntax to compile to (see options below for possible values)
+        },
       },
 
       // Styles: Inject CSS into the head with source maps
@@ -74,10 +77,12 @@ module.exports = {
             options: { sourceMap: true, importLoaders: 1 },
           },
           {
-            loader: 'postcss-loader', options: { sourceMap: true },
+            loader: 'postcss-loader',
+            options: { sourceMap: true },
           },
           {
-            loader: 'sass-loader', options: { sourceMap: true },
+            loader: 'sass-loader',
+            options: { sourceMap: true },
           },
         ],
       },
@@ -95,4 +100,13 @@ module.exports = {
       },
     ],
   },
+  externals: [
+    // Ignore some dependencies included in amCharts
+    function ({ context, request }, callback) {
+      if (/xlsx|canvg|pdfmake|moment/.test(request)) {
+        return callback(null, `commonjs ${request}`);
+      }
+      callback();
+    },
+  ],
 };
